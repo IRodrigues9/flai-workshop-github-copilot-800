@@ -1,84 +1,223 @@
 /* ── OctoFit Tracker – global styles ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --octofit-primary:   #0d6efd;
-  --octofit-dark:      #1a1d23;
-  --octofit-card-bg:   #ffffff;
-  --octofit-muted:     #6c757d;
+  --octofit-primary:      #0d6efd;
+  --octofit-primary-dark: #0a58ca;
+  --octofit-accent:       #61dafb;
+  --octofit-success:      #20c997;
+  --octofit-warning:      #ffc107;
+  --octofit-danger:       #e63946;
+  --octofit-dark:         #0f1117;
+  --octofit-dark2:        #1e2130;
+  --octofit-card-bg:      #ffffff;
+  --octofit-muted:        #8492a6;
+  --octofit-bg:           #eef1f8;
+  --octofit-border:       #d0d9f0;
+  --octofit-text:         #1e2130;
+  --octofit-link:         #0d6efd;
 }
 
+/* ── Base ── */
 body {
-  background-color: #f0f2f5;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  color: #212529;
+  background: linear-gradient(160deg, #e8edf8 0%, #f3f5fc 60%, #eef1f8 100%);
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--octofit-text);
+}
+
+/* ── Links ── */
+a {
+  color: var(--octofit-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--octofit-primary-dark);
+  text-decoration: underline;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--octofit-dark2);
+  font-weight: 700;
 }
 
 /* ── Navbar ── */
 .octofit-navbar {
-  background: linear-gradient(135deg, #1a1d23 0%, #2d3748 100%) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(90deg, #0f1117 0%, #1a2035 60%, #1e2a45 100%) !important;
+  box-shadow: 0 3px 16px rgba(13, 110, 253, 0.25);
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+
+.octofit-navbar-logo {
+  height: 36px;
+  width: 36px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(97, 218, 251, 0.55);
+  object-fit: contain;
+  background: rgba(13, 110, 253, 0.15);
 }
 
 .octofit-navbar .navbar-brand {
-  font-weight: 700;
-  font-size: 1.4rem;
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: 0.4px;
   color: #61dafb !important;
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
 .octofit-navbar .nav-link {
-  color: rgba(255, 255, 255, 0.85) !important;
-  font-weight: 500;
-  transition: color 0.2s;
-  padding: 0.5rem 0.9rem !important;
-  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: color 0.18s, background-color 0.18s;
+  padding: 0.45rem 1rem !important;
+  border-radius: 8px;
+  letter-spacing: 0.3px;
 }
 
-.octofit-navbar .nav-link:hover,
-.octofit-navbar .nav-link.active {
+.octofit-navbar .nav-link:hover {
   color: #61dafb !important;
-  background-color: rgba(97, 218, 251, 0.1);
+  background-color: rgba(97, 218, 251, 0.12);
+}
+
+.octofit-navbar .nav-link.active {
+  color: #fff !important;
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.40);
 }
 
 /* ── Hero / Jumbotron ── */
 .octofit-hero {
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 50%, #6610f2 100%);
   color: #fff;
-  border-radius: 16px;
-  padding: 3.5rem 2.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 20px rgba(13, 110, 253, 0.30);
+  border-radius: 20px;
+  padding: 4rem 3rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 32px rgba(13, 110, 253, 0.35), 0 2px 8px rgba(0,0,0,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.octofit-hero::before {
+  content: "";
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 260px; height: 260px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.octofit-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -80px; left: -40px;
+  width: 320px; height: 320px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .octofit-hero h1 {
-  font-size: 2.6rem;
-  font-weight: 800;
+  font-size: 2.8rem;
+  font-weight: 900;
   margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
 }
 
 .octofit-hero p.lead {
   font-size: 1.2rem;
-  opacity: 0.9;
+  opacity: 0.92;
+  max-width: 560px;
+}
+
+.octofit-hero .btn-light {
+  background: rgba(255,255,255,0.95);
+  color: #0d6efd;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.octofit-hero .btn-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  color: var(--octofit-primary-dark);
 }
 
 /* ── Section cards ── */
 .octofit-card {
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--octofit-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(30, 33, 48, 0.08);
   background: var(--octofit-card-bg);
+  overflow: hidden;
 }
 
 .octofit-card .card-header {
-  background: linear-gradient(135deg, #1a1d23 0%, #2d3748 100%);
+  background: linear-gradient(90deg, #0f1117 0%, #1a2035 100%);
   color: #fff;
-  border-radius: 12px 12px 0 0 !important;
-  padding: 1rem 1.5rem;
+  border-bottom: none;
+  padding: 1.1rem 1.6rem;
 }
 
 .octofit-card .card-header h2 {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 700;
   margin: 0;
+  color: #61dafb;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.30);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(13, 110, 253, 0.45);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #20c997 0%, #0d9488 100%) !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #e63946 0%, #c1121f 100%) !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #e09400 100%) !important;
+  border: none !important;
+  color: #1e2130 !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%) !important;
+  border: none !important;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
 /* ── Tables ── */
@@ -87,21 +226,38 @@ body {
 }
 
 .octofit-table thead th {
-  background-color: #f8f9fa;
-  color: #495057;
-  font-weight: 600;
-  font-size: 0.85rem;
+  background: linear-gradient(90deg, #1a2035 0%, #1e2a45 100%);
+  color: #61dafb;
+  font-weight: 700;
+  font-size: 0.82rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 2px solid #dee2e6;
+  letter-spacing: 0.07em;
+  border-bottom: none;
+  padding: 0.9rem 1rem;
 }
 
 .octofit-table tbody tr {
   transition: background-color 0.15s;
+  border-bottom: 1px solid #eef1f8;
 }
 
 .octofit-table tbody tr:hover {
-  background-color: #f0f4ff;
+  background-color: #eef3ff;
+}
+
+.octofit-table tbody td {
+  color: var(--octofit-text);
+  font-weight: 500;
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+}
+
+.octofit-table tbody tr:nth-child(even) {
+  background-color: #f7f9fe;
+}
+
+.octofit-table tbody tr:nth-child(even):hover {
+  background-color: #eef3ff;
 }
 
 /* ── Loading spinner ── */
@@ -112,15 +268,43 @@ body {
   min-height: 200px;
 }
 
+.spinner-border {
+  color: var(--octofit-primary) !important;
+}
+
 /* ── Empty-state text ── */
 .octofit-empty {
   text-align: center;
   color: var(--octofit-muted);
-  padding: 2rem 0;
+  padding: 2.5rem 0;
+  font-size: 1.05rem;
 }
 
 /* ── Rank badge overrides for leaderboard top 3 ── */
-.rank-gold   { background-color: #f5c518 !important; color: #000 !important; }
-.rank-silver { background-color: #adb5bd !important; color: #000 !important; }
-.rank-bronze { background-color: #cd7f32 !important; color: #fff !important; }
+.rank-gold   { background: linear-gradient(135deg, #f5c518, #e0a800) !important; color: #000 !important; font-weight: 700 !important; }
+.rank-silver { background: linear-gradient(135deg, #c0c8d4, #8c96a3) !important; color: #000 !important; font-weight: 700 !important; }
+.rank-bronze { background: linear-gradient(135deg, #cd7f32, #a0522d) !important; color: #fff !important; font-weight: 700 !important; }
 
+/* ── Badge / pill ── */
+.badge {
+  font-weight: 600;
+  padding: 0.38em 0.7em;
+  border-radius: 6px;
+  font-size: 0.8em;
+}
+
+/* ── Scrollbar (Webkit) ── */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--octofit-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #c0ccdf;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0d6efd;
+}

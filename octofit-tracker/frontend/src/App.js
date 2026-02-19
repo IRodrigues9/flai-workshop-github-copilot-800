@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import octofitLogo from './OctofitLogo.svg';
 import Users from './components/Users';
 import Teams from './components/Teams';
 import Activities from './components/Activities';
@@ -23,7 +24,10 @@ function App() {
       {/* ── Navbar ── */}
       <nav className="navbar navbar-expand-lg octofit-navbar">
         <div className="container">
-          <NavLink className="navbar-brand" to="/">&#128170; OctoFit Tracker</NavLink>
+          <NavLink className="navbar-brand" to="/">
+            <img src={octofitLogo} alt="OctoFit logo" className="octofit-navbar-logo" />
+            OctoFit Tracker
+          </NavLink>
 
           {/* Hamburger toggle */}
           <button
