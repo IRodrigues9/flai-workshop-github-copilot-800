@@ -10,9 +10,8 @@ function Users() {
   const [saveError, setSaveError] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  const baseUrl = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`;
-  const apiUrl = `${baseUrl}/api/users/`;
-  const teamsUrl = `${baseUrl}/api/teams/`;
+  const apiUrl = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`;
+  const teamsUrl = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`;
 
   const fetchUsers = () => {
     return fetch(apiUrl)
