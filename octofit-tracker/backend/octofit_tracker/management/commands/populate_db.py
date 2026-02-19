@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 from octofit_tracker.models import User, Team, Activity, Leaderboard, Workout
-from datetime import datetime, timedelta
+from datetime import timedelta
 import random
 
 
@@ -89,7 +90,7 @@ class Command(BaseCommand):
                 duration = random.randint(20, 120)
                 calories_burned = int(duration * random.uniform(5, 12))
                 distance = round(random.uniform(2, 15), 2) if activity_type in ['Running', 'Cycling', 'Swimming'] else None
-                activity_date = datetime.now() - timedelta(days=random.randint(0, 30))
+                activity_date = timezone.now() - timedelta(days=random.randint(0, 30))
                 
                 activity = Activity.objects.create(
                     user_id=str(user._id),
