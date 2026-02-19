@@ -1,38 +1,126 @@
-.App {
-  text-align: center;
+/* ── OctoFit Tracker – global styles ── */
+:root {
+  --octofit-primary:   #0d6efd;
+  --octofit-dark:      #1a1d23;
+  --octofit-card-bg:   #ffffff;
+  --octofit-muted:     #6c757d;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #212529;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ── Navbar ── */
+.octofit-navbar {
+  background: linear-gradient(135deg, #1a1d23 0%, #2d3748 100%) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.octofit-navbar .navbar-brand {
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #61dafb !important;
+}
+
+.octofit-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 6px;
+}
+
+.octofit-navbar .nav-link:hover,
+.octofit-navbar .nav-link.active {
+  color: #61dafb !important;
+  background-color: rgba(97, 218, 251, 0.1);
+}
+
+/* ── Hero / Jumbotron ── */
+.octofit-hero {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 3.5rem 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(13, 110, 253, 0.30);
+}
+
+.octofit-hero h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.octofit-hero p.lead {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ── Section cards ── */
+.octofit-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  background: var(--octofit-card-bg);
+}
+
+.octofit-card .card-header {
+  background: linear-gradient(135deg, #1a1d23 0%, #2d3748 100%);
+  color: #fff;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1rem 1.5rem;
+}
+
+.octofit-card .card-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ── Tables ── */
+.octofit-table {
+  margin-bottom: 0;
+}
+
+.octofit-table thead th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.octofit-table tbody tr {
+  transition: background-color 0.15s;
+}
+
+.octofit-table tbody tr:hover {
+  background-color: #f0f4ff;
+}
+
+/* ── Loading spinner ── */
+.octofit-spinner-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 200px;
 }
 
-.App-link {
-  color: #61dafb;
+/* ── Empty-state text ── */
+.octofit-empty {
+  text-align: center;
+  color: var(--octofit-muted);
+  padding: 2rem 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* ── Rank badge overrides for leaderboard top 3 ── */
+.rank-gold   { background-color: #f5c518 !important; color: #000 !important; }
+.rank-silver { background-color: #adb5bd !important; color: #000 !important; }
+.rank-bronze { background-color: #cd7f32 !important; color: #fff !important; }
+

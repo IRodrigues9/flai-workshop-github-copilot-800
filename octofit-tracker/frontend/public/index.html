@@ -24,7 +24,47 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>OctoFit Tracker</title>
+    <!-- Suppress browser-extension errors (e.g. Fixinator) by wrapping
+         window.addEventListener BEFORE the CRA bundle registers its overlay
+         handler. Every 'error' listener registered after this script runs
+         will be silently skipped for extension-originated errors. -->
+    <script>
+      (function () {
+        function isExtensionError(event) {
+          var src = event.filename || '';
+          var msg = event.message || '';
+          return (
+            src.indexOf('chrome-extension://') === 0 ||
+            src.indexOf('moz-extension://') === 0 ||
+            msg.indexOf('fixinator') !== -1 ||
+            msg.indexOf('background page') !== -1
+          );
+        }
+
+        // Wrap future addEventListener calls so that any 'error' handler
+        // registered by the CRA overlay never sees extension errors.
+        var _origAdd = EventTarget.prototype.addEventListener;
+        EventTarget.prototype.addEventListener = function (type, fn, opts) {
+          if (type === 'error' && this === window) {
+            var wrapped = function (event) {
+              if (isExtensionError(event)) return;
+              return fn.apply(this, arguments);
+            };
+            return _origAdd.call(this, type, wrapped, opts);
+          }
+          return _origAdd.call(this, type, fn, opts);
+        };
+
+        // Also guard window.onerror in case CRA uses assignment.
+        window.onerror = function (msg, src) {
+          if (isExtensionError({ message: msg || '', filename: src || '' })) {
+            return true; // suppressed
+          }
+          return false;
+        };
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

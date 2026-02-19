@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
+const DIFFICULTY_COLORS = {
+  easy:   'success',
+  medium: 'warning',
+  hard:   'danger',
+};
+
+function difficultyBadge(level) {
+  const color = DIFFICULTY_COLORS[(level || '').toLowerCase()] || 'secondary';
+  return <span className={`badge bg-${color}`}>{level}</span>;
+}
+
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,53 +22,74 @@ function Workouts() {
     console.log('Workouts component: fetching from', apiUrl);
     fetch(apiUrl)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         return response.json();
       })
       .then((data) => {
-        console.log('Workouts component: fetched data', data);
         const results = Array.isArray(data) ? data : data.results || [];
         setWorkouts(results);
         setLoading(false);
       })
       .catch((err) => {
-        console.error('Workouts component: error fetching data', err);
         setError(err.message);
         setLoading(false);
       });
   }, [apiUrl]);
 
-  if (loading) return <div className="container mt-4"><p>Loading workouts...</p></div>;
-  if (error) return <div className="container mt-4"><div className="alert alert-danger">Error: {error}</div></div>;
+  if (loading) return (
+    <div className="octofit-spinner-wrapper">
+      <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading workouts...</span>
+      </div>
+    </div>
+  );
+
+  if (error) return (
+    <div className="alert alert-danger d-flex align-items-center" role="alert">
+      <i className="me-2">&#9888;</i> {error}
+    </div>
+  );
 
   return (
-    <div className="container mt-4">
-      <h2>Workouts</h2>
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Difficulty</th>
-            <th>Duration (min)</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {workouts.map((workout, index) => (
-            <tr key={workout._id || index}>
-              <td>{workout.name}</td>
-              <td>{workout.category}</td>
-              <td>{workout.difficulty}</td>
-              <td>{workout.duration}</td>
-              <td>{workout.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {workouts.length === 0 && <p>No workouts found.</p>}
+    <div className="card octofit-card">
+      <div className="card-header">
+        <h2>&#128170; Workouts</h2>
+      </div>
+      <div className="card-body p-0">
+        {workouts.length === 0 ? (
+          <p className="octofit-empty">No workouts found.</p>
+        ) : (
+          <div className="table-responsive">
+            <table className="table table-striped table-hover octofit-table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Difficulty</th>
+                  <th scope="col">Duration (min)</th>
+                  <th scope="col">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {workouts.map((workout, index) => (
+                  <tr key={workout._id || index}>
+                    <td className="text-muted">{index + 1}</td>
+                    <td><strong>{workout.name}</strong></td>
+                    <td><span className="badge bg-info text-dark">{workout.category}</span></td>
+                    <td>{difficultyBadge(workout.difficulty)}</td>
+                    <td>{workout.duration}</td>
+                    <td className="text-muted">{workout.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+      <div className="card-footer text-muted small">
+        {workouts.length} workout{workouts.length !== 1 ? 's' : ''} available
+      </div>
     </div>
   );
 }

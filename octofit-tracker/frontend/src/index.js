@@ -6,6 +6,25 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Suppress errors originating from browser extensions (e.g. Fixinator) so
+// they don't trigger the React dev-server error overlay.
+// Capture phase fires before CRA's bubble-phase handler; stopImmediatePropagation
+// prevents any subsequent listener (including the overlay) from seeing the event.
+window.addEventListener('error', (event) => {
+  const src = event.filename || '';
+  const msg = event.message || '';
+  if (
+    src.startsWith('chrome-extension://') ||
+    src.startsWith('moz-extension://') ||
+    msg.toLowerCase().includes('fixinator') ||
+    msg.toLowerCase().includes('background page')
+  ) {
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    event.preventDefault();
+  }
+}, /* capture */ true);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
